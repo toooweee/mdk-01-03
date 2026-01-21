@@ -46,6 +46,12 @@ export default function Index() {
     setDisplay('0');
   };
 
+  const clearChar = () => {
+    const newExpression = expression.slice(0, -1);
+    setExpression(newExpression)
+    setDisplay(newExpression);
+  }
+
   return (
     <View style={styles.container}>
       <View style={styles.displayContainer}>
@@ -54,7 +60,7 @@ export default function Index() {
       <View style={styles.buttonContainer}>
         <View style={styles.row}>
           <Button title="AC" color="#ff9500" onPress={clear} />
-          <Button title="+/-" color="#ff9500" onPress={() => {}} />
+          <Button title="🔚" color="#ff9500" onPress={() => clearChar()} />
           <Button title="%" color="#ff9500" onPress={() => appendOperator('%')} />
           <Button title="/" color="#ff9500" onPress={() => appendOperator('/')} />
         </View>
