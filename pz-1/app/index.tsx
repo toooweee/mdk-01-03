@@ -1,27 +1,47 @@
-import {StyleSheet, View} from "react-native";
+import { StyleSheet, View, Text, Pressable } from "react-native";
+import {useEffect, useState} from "react";
+import Dialog from "@/app/dialog";
 import {Link} from "expo-router";
 
-const Index = () => {
+export default function Index() {
+  const [isDialogVisible, setIsDialogVisible] = useState(false);
+
+  useEffect(() => {
+    console.log('On create')
+  }, [])
+
   return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Link href={'/normal'} style={styles.link}>Открыть обычный экран</Link>
-      <Link href={'/dialog'} style={styles.link}>Открыть экран с модальным окном</Link>
+    <View style={styles.container}>
+      <Link href={'/normal'}>
+        Открыть обычный экран
+      </Link>
+
+      <Pressable onPress={() => setIsDialogVisible(true)}>
+        <Text>Открыть модалку</Text>
+      </Pressable>
+
+      <Dialog
+        visible={isDialogVisible}
+        onClose={() => setIsDialogVisible(false)}
+      />
     </View>
   );
-};
+}
 
 const styles = StyleSheet.create({
-  link: {
-    marginTop: 10,
-    textDecorationLine: 'underline',
-    fontSize: 18
-  }
-})
-
-export default Index;
+  container: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  button: {
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    backgroundColor: "#4da6ff",
+    borderRadius: 8,
+  },
+  buttonText: {
+    color: "white",
+    fontSize: 16,
+  },
+});
